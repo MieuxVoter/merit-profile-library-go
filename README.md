@@ -10,7 +10,7 @@ Generate merit profiles (in SVG), for use for example in [Majority Judgment] pol
 go get github.com/mieuxvoter/merit-profile-library-go
 ```
 
-```go
+```golang
 package main
 
 import (
@@ -19,22 +19,22 @@ import (
 )
 
 func main() {
-    proposals := []merit.Proposal{
-        {
-            Tally: []uint{3, 7, 2},
-            Name:  "Dominique",
-        },
-        {
-            Tally: []uint{2, 4, 6},
-            Name:  "Théo 🗳",
-        },
-        {
-            Tally: []uint{5, 0, 7},
-            Name:  "Alice the wonderful napping kangaroo 🦘 of the Æther whose name is clipped",
-        },
-    }
-    
-    svg, err := merit.RenderSvg(proposals)
+	proposals := []merit.Proposal{
+		{
+			Tally: []uint{3, 7, 2},
+			Name:  "Dominique",
+		},
+		{
+			Tally: []uint{2, 4, 6},
+			Name:  "Théo 🗳",
+		},
+		{
+			Tally: []uint{5, 0, 7},
+			Name:  "Alice the wonderful napping kangaroo 🦘 of the Æther whose name is clipped",
+		},
+	}
+
+	svg, err := merit.RenderSvg(proposals)
 
 	if err != nil {
 		panic(err)
