@@ -34,7 +34,7 @@ func main() {
 		},
 	}
 
-	svg, err := merit.RenderSvg(proposals)
+	svg, err := merit.RenderLinearProfileSVG(proposals)
 
 	if err != nil {
 		panic(err)

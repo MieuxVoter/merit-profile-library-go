@@ -8,20 +8,20 @@ import (
 func main() {
 	proposals := []merit.Proposal{
 		{
-			Tally: []uint{3, 7, 2},
-			Name:  "Dominique",
-		},
-		{
-			Tally: []uint{2, 4, 6},
-			Name:  "Théo 🗳",
-		},
-		{
-			Tally: []uint{5, 0, 7},
 			Name:  "Alice the wonderful napping kangaroo 🦘 of the Æther",
+			Tally: []uint{4, 0, 3, 7},
+		},
+		{
+			Name:  "Dominique",
+			Tally: []uint{5, 6, 1, 2},
+		},
+		{
+			Name:  "Théo 🗳",
+			Tally: []uint{3, 3, 2, 6},
 		},
 	}
 
-	svg, err := merit.RenderSvg(proposals)
+	svg, err := merit.RenderLinearProfileSVG(proposals)
 	if err != nil {
 		panic(err)
 	}
