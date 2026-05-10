@@ -49,6 +49,7 @@ func main() {
 > - **Consistent**: Their shape must be the same.
 > - **Balanced**: Their total must be the same.
 
+![Merit profiles of the above code example](./test.svg)
 
 ## Test
 
