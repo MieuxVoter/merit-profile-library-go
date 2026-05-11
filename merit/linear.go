@@ -266,6 +266,7 @@ func RenderLinearProfileSVG(
 
 	svg := stringBuilder.String()
 	svg = strings.Replace(svg, vanity, "", 1)
+	// TBD: perhaps we do not need to specify the encoding
 	svg = strings.Replace(svg, xmlHeader, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>", 1)
 
 	return svg, nil
