@@ -272,9 +272,14 @@ func RenderLinearProfileSVG(
 }
 
 func toHex(c color.Color) string {
+	_, _, _, a := c.RGBA()
+	if a == 0 {
+		// Since we can't support partial alpha, at least support full transparency
+		return "transparent"
+	}
 	return judgment.DumpColorHexString(
 		c,
 		"#",
-		false, // inkscape cannot read hex colors with alpha
+		false, // inkscape fails to read hex colors with alpha
 	)
 }
