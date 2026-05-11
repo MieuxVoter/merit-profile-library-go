@@ -172,7 +172,7 @@ func RenderLinearProfileSVG(
 			d, width+2*cfg.padding,
 			d, height+2*cfg.padding,
 		),
-		`overflow="hidden"`,
+		//`overflow="hidden"`, // nope ; does naught
 	)
 
 	// SVG Definitions
@@ -195,7 +195,7 @@ func RenderLinearProfileSVG(
 		width+2*cfg.padding, height+2*cfg.padding,
 		cfg.bgCornerRadius, cfg.bgCornerRadius,
 		fmt.Sprintf(
-			"fill:%s",
+			`fill="%s"`,
 			toHex(cfg.bgColor),
 		),
 	)
@@ -216,7 +216,7 @@ func RenderLinearProfileSVG(
 				localX, localY,
 				gradeWidth, localHeight,
 				cfg.gradeCornerRadius, cfg.gradeCornerRadius,
-				"fill:"+gradeColor,
+				fmt.Sprintf(`fill="%s"`, gradeColor),
 			)
 			localX += gradeWidth
 		}
@@ -275,6 +275,6 @@ func toHex(c color.Color) string {
 	return judgment.DumpColorHexString(
 		c,
 		"#",
-		true,
+		false, // inkscape cannot read hex colors with alpha
 	)
 }
