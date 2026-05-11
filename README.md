@@ -21,15 +21,15 @@ import (
 func main() {
 	proposals := []merit.Proposal{
 		{
-			Tally: []uint{3, 7, 2},
+			Tally: []uint64{3, 7, 2},
 			Name:  "Dominique",
 		},
 		{
-			Tally: []uint{2, 4, 6},
+			Tally: []uint64{2, 4, 6},
 			Name:  "Théo 🗳",
 		},
 		{
-			Tally: []uint{5, 0, 7},
+			Tally: []uint64{5, 0, 7},
 			Name:  "Alice the wonderful napping kangaroo 🦘 of the Æther whose name is clipped",
 		},
 	}

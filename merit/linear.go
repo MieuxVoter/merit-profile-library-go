@@ -29,7 +29,7 @@ type Proposal struct {
 	// Name of Proposal.  An empty string is allowed.
 	Name string
 	// Tally of the grades received by this Proposal, from "worst" grade to "best" grade.
-	Tally []uint
+	Tally []uint64
 }
 
 // renderOptions uses the functional options design pattern.

@@ -9,15 +9,15 @@ func main() {
 	proposals := []merit.Proposal{
 		{
 			Name:  "Alice the wonderful napping kangaroo 🦘 of the Æther",
-			Tally: []uint{4, 0, 3, 7},
+			Tally: []uint64{4, 0, 3, 7},
 		},
 		{
 			Name:  "Dominique",
-			Tally: []uint{5, 6, 1, 2},
+			Tally: []uint64{5, 6, 1, 2},
 		},
 		{
 			Name:  "Théo 🗳",
-			Tally: []uint{3, 3, 2, 6},
+			Tally: []uint64{3, 3, 2, 6},
 		},
 	}
 
