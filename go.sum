@@ -2,8 +2,9 @@ github.com/ajstarks/gensvg v0.0.0-20210923152200-4042c242e95e h1:450GYH87+/+YEC6
 github.com/ajstarks/gensvg v0.0.0-20210923152200-4042c242e95e/go.mod h1:PtU6ofchbU0VxGlg+klpebsi0DY7V9GrxtYeMJkWutM=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/lucasb-eyer/go-colorful v1.2.0 h1:1nnpGOrhyZZuNyfu1QjKiUICQ74+3FNCN69Aj6K7nkY=
 github.com/lucasb-eyer/go-colorful v1.2.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
+github.com/lucasb-eyer/go-colorful v1.4.0 h1:UtrWVfLdarDgc44HcS7pYloGHJUjHV/4FwW4TvVgFr4=
+github.com/lucasb-eyer/go-colorful v1.4.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
 github.com/mieuxvoter/majority-judgment-library-go v0.3.3 h1:BtzXQaCa65B60+BQghss5RVdqkFSFYv/RP/wtLTRn2o=
 github.com/mieuxvoter/majority-judgment-library-go v0.3.3/go.mod h1:3WukXYakDhUFmGHmDP0escphOjNZE2lYaEHcqZ7fc28=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
