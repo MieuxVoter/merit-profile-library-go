@@ -4,6 +4,7 @@ Generate merit profiles (in SVG), for use for example in [Majority Judgment] pol
 
 [Majority Judgment]: https://mieuxvoter.fr
 
+
 ## Usage
 
 ```shell
@@ -21,16 +22,16 @@ import (
 func main() {
 	proposals := []merit.Proposal{
 		{
-			Tally: []uint64{3, 7, 2},
+			Name:  "Alice the wonderful napping kangaroo 🦘 of the Æther",
+			Tally: []uint64{4, 0, 3, 7},
+		},
+		{
 			Name:  "Dominique",
+			Tally: []uint64{5, 6, 1, 2},
 		},
 		{
-			Tally: []uint64{2, 4, 6},
 			Name:  "Théo 🗳",
-		},
-		{
-			Tally: []uint64{5, 0, 7},
-			Name:  "Alice the wonderful napping kangaroo 🦘 of the Æther whose name is clipped",
+			Tally: []uint64{3, 3, 2, 6},
 		},
 	}
 
@@ -51,8 +52,35 @@ func main() {
 
 ![Merit profiles of the above code example](./test.svg)
 
-## Test
 
-```shell
-go test ./merit
+## Options
+
+There are options you can pass to `RenderLinearProfileSVG()` to customize the output.
+
+Here's an example:
+
+```golang
+svg, err := merit.RenderLinearProfileSVG(
+	proposals,
+	merit.WithWidth(1024),
+	merit.WithHeight(2048),
+	merit.WithPadding(32),
+	merit.WithVerticalSpacing(32),
+	merit.WithBgColor(color.RGBA{R: 0, G: 0, B: 0, A:255}),
+	merit.WithMedianLineColor(color.RGBA{R: 0, G: 0, B: 255, A:255}),
+	merit.WithTextColor(color.RGBA{R: 255, G: 0, B: 255, A:255}),
+	merit.WithOutlineColor(color.RGBA{R: 0, G: 255, B: 255, A:255}),
+	//merit.WithGradesPalette(…),
+)
 ```
+
+## Development Goodies
+
+> Unit-testing on SVG generation is clunky at best, and not really worth it.
+
+Therefore, we used a custom flavor of `svgplay` for convenience.
+
+    go run svgplay.go
+
+Visit http://localhost:1999/test.go
+

@@ -26,9 +26,12 @@ import (
 
 // Proposal is also known as Candidate or Option.  It received grades from voters.
 type Proposal struct {
-	// Name of Proposal.  An empty string is allowed.
+	// Name of the Proposal.  An empty string is allowed.
 	Name string
 	// Tally of the grades received by this Proposal, from "worst" grade to "best" grade.
+	// An empty list is not allowed, and tallies across proposals must be:
+	// 1. Consistent: have the same length, that is they should represent the same amount of grades
+	// 2. Balanced: their sum must be the same, that is they should hold the same amount of judgments
 	Tally []uint64
 }
 
@@ -45,7 +48,9 @@ type renderOptions struct {
 	medianLineColor   color.Color
 	textColor         color.Color
 	outlineColor      color.Color
+	patternColor      color.Color
 	gradesPalette     color.Palette
+	patterns          []PatternDefinition
 }
 
 type RenderOptions func(options *renderOptions)
@@ -98,6 +103,12 @@ func WithOutlineColor(outlineColor color.Color) RenderOptions {
 	}
 }
 
+func WithPatternColor(patternColor color.Color) RenderOptions {
+	return func(options *renderOptions) {
+		options.patternColor = patternColor
+	}
+}
+
 func WithGradesPalette(gradesPalette color.Palette) RenderOptions {
 	return func(options *renderOptions) {
 		options.gradesPalette = gradesPalette
@@ -110,7 +121,7 @@ const xmlHeader = `<?xml version="1.0"?>`
 
 func RenderLinearProfileSVG(
 	proposals []Proposal,
-	opts ...RenderOptions,
+	options ...RenderOptions,
 ) (string, error) {
 
 	amountOfProposals := float64(len(proposals))
@@ -134,49 +145,54 @@ func RenderLinearProfileSVG(
 		verticalSpacing:   16.00,
 		gradeCornerRadius: 6.00,
 		bgCornerRadius:    12.00,
-		medianLineColor:   color.RGBA{R: 1, G: 1, B: 1, A: 255},
-		textColor:         color.RGBA{R: 0, G: 0, B: 0, A: 255},
-		outlineColor:      color.RGBA{R: 255, G: 255, B: 255, A: 255},
-		bgColor:           color.RGBA{R: 255, G: 255, B: 255, A: 255},
+		bgColor:           color.NRGBA{R: 255, G: 255, B: 255, A: 255},
+		medianLineColor:   color.NRGBA{R: 1, G: 1, B: 1, A: 255},
+		textColor:         color.NRGBA{R: 0, G: 0, B: 0, A: 255},
+		outlineColor:      color.NRGBA{R: 255, G: 255, B: 255, A: 255},
+		patternColor:      color.NRGBA{R: 0, G: 0, B: 0, A: 255},
 		gradesPalette:     judgment.CreateDefaultPalette(amountOfGrades),
+		patterns:          CreateDefaultPatterns(amountOfGrades),
 	}
-	for _, opt := range opts {
-		opt(&cfg)
+	for _, option := range options {
+		option(&cfg)
 	}
 
 	// Compute a sensible, dynamic default height
+	sensibleDefaultGradeHeight := 48.0
+	totalVerticalSpacing := cfg.verticalSpacing * (amountOfProposals - 1)
 	if cfg.height == -1.0 {
-		cfg.height = amountOfProposals*42.0 + cfg.verticalSpacing*(amountOfProposals+1.0)
+		cfg.height = amountOfProposals*sensibleDefaultGradeHeight + totalVerticalSpacing
 	}
 
 	// Check the consistency of the grades palette
+	// TBD: perhaps we could be lenient and loop them around with some modulo instead?
 	if len(cfg.gradesPalette) < amountOfGrades {
 		return "", fmt.Errorf("grades palette is too small")
 	}
 
 	width := cfg.width
 	height := cfg.height
-	totalVerticalSpacing := cfg.verticalSpacing * (amountOfProposals - 1)
 
 	// All's well, let's start generating the SVG
 	stringBuilder := new(strings.Builder)
 	canvas := gensvg.New(stringBuilder)
 
-	d := canvas.Decimals
+	floatPrecision := canvas.Decimals
 	canvas.Start(
 		width, height,
+		// Use a crafty viewBox on the whole svg to enforce our padding
 		fmt.Sprintf(
 			`viewBox="%.*f %.*f %.*f %.*f"`,
-			d, -cfg.padding,
-			d, -cfg.padding,
-			d, width+2*cfg.padding,
-			d, height+2*cfg.padding,
+			floatPrecision, -cfg.padding,
+			floatPrecision, -cfg.padding,
+			floatPrecision, width+2*cfg.padding,
+			floatPrecision, height+2*cfg.padding,
 		),
-		//`overflow="hidden"`, // nope ; does naught
 	)
 
 	// SVG Definitions
 	canvas.Def()
+
 	// We use clipping paths, since overflow does not work properly
 	for proposalIndex := range proposals {
 		localHeight := (height - totalVerticalSpacing) / (amountOfProposals)
@@ -187,6 +203,27 @@ func RenderLinearProfileSVG(
 		canvas.Rect(0, localY, width, localHeight)
 		canvas.ClipEnd()
 	}
+
+	// Background patterns (accessibility, color-impaired)
+	//usedPatternsDefs := availablePatternDefinitions
+	//for _, patternDef := range usedPatternsDefs {
+	//	patternDef(canvas, cfg.patternColor)
+	//}
+	//for i := range amountOfGrades {
+	//for i := 0; i < amountOfGrades; i++ {
+	//	chooseDefaultPatternDefinitionForIndex(i, amountOfGrades)(
+	//		canvas, cfg.patternColor,
+	//	)
+	//}
+	//definePatternOfHearts(canvas, cfg.patternColor)
+	//definePatternOfAscendingLines(canvas, cfg.patternColor)
+
+	amountOfPatterns := len(cfg.patterns)
+	patternIds := make([]string, amountOfPatterns)
+	for i, patternDefinition := range cfg.patterns {
+		patternIds[i] = patternDefinition(canvas, cfg.patternColor)
+	}
+
 	canvas.DefEnd()
 
 	// Background
@@ -202,9 +239,10 @@ func RenderLinearProfileSVG(
 
 	//canvas.Rect(0, 0, width, height, "fill:darkred")
 
+	localHeight := (height - totalVerticalSpacing) / (amountOfProposals)
 	for proposalIndex, proposal := range proposals {
-		localHeight := (height - totalVerticalSpacing) / (amountOfProposals)
 		localY := float64(proposalIndex) * (localHeight + cfg.verticalSpacing)
+
 		//canvas.Rect(0, localY, width, localHeight, "fill:magenta")
 
 		// Draw the colored rectangles of the grades.
@@ -212,12 +250,32 @@ func RenderLinearProfileSVG(
 		for gradeIndex, gradeTally := range proposal.Tally {
 			gradeColor := toHex(cfg.gradesPalette[gradeIndex])
 			gradeWidth := width * float64(gradeTally) / amountOfJudges
+
+			rectX := localX
+			rectY := localY
+			rectW := gradeWidth
+			rectH := localHeight
+
+			//fmt.Printf("Y: %f\n", rectY)
+
+			// Color
 			canvas.Roundrect(
-				localX, localY,
-				gradeWidth, localHeight,
+				rectX, rectY,
+				rectW, rectH,
 				cfg.gradeCornerRadius, cfg.gradeCornerRadius,
 				fmt.Sprintf(`fill="%s"`, gradeColor),
 			)
+			// Pattern
+			if amountOfPatterns > 0 {
+				patternId := patternIds[gradeIndex%amountOfPatterns]
+				canvas.Roundrect(
+					rectX, rectY,
+					rectW, rectH,
+					cfg.gradeCornerRadius, cfg.gradeCornerRadius,
+					fmt.Sprintf(`fill="url(#%s)"`, patternId),
+				)
+			}
+
 			localX += gradeWidth
 		}
 
@@ -231,7 +289,7 @@ func RenderLinearProfileSVG(
 		)
 
 		// Draw the name of the proposal, and its outline
-		nameX := 12.00 // small padding-left
+		nameX := 16.00 // small padding-left
 		nameY := localY + 0.5*localHeight
 		nameClipper := fmt.Sprintf("clipProposal%d", proposalIndex)
 		canvas.Text(
@@ -267,20 +325,7 @@ func RenderLinearProfileSVG(
 	svg := stringBuilder.String()
 	svg = strings.Replace(svg, vanity, "", 1)
 	// TBD: perhaps we do not need to specify the encoding
-	svg = strings.Replace(svg, xmlHeader, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>", 1)
+	svg = strings.Replace(svg, xmlHeader, `<?xml version="1.0" encoding="UTF-8"?>`, 1)
 
 	return svg, nil
-}
-
-func toHex(c color.Color) string {
-	_, _, _, a := c.RGBA()
-	if a == 0 {
-		// Since we can't support partial alpha, at least support full transparency
-		return "transparent"
-	}
-	return judgment.DumpColorHexString(
-		c,
-		"#",
-		false, // inkscape fails to read hex colors with alpha
-	)
 }
