@@ -25,21 +25,22 @@ import (
 func main() {
 	proposals := []merit.Proposal{
 		{
-			Name:  "Alice the wonderful napping kangaroo 🦘 of the Æther",
-			Tally: []uint64{4, 0, 3, 7}, // 4 grades, 14 judgments in total
+			Name:  "Pizza 4 Dimensions",
+			Tally: []uint64{5, 4, 11}, // 3 grades, 20 judgments
 		},
 		{
-			Name:  "Dominique",
-			Tally: []uint64{5, 6, 1, 2}, // same
+			Name:  "Lasagnes Assange",
+			Tally: []uint64{9, 5, 6}, // same
 		},
 		{
-			Name:  "Théo 🗳",
-			Tally: []uint64{3, 3, 2, 6}, // same
+			Name:  "Jurassique Pâtes",
+			Tally: []uint64{14, 0, 6}, // same
 		},
 	}
 
-	svg, err := merit.RenderLinearProfileSVG(proposals)
-
+	svg, err := merit.RenderLinearProfileSVG(
+		proposals,
+	)
 	if err != nil {
 		panic(err)
 	}
@@ -48,12 +49,12 @@ func main() {
 }
 ```
 
+![Merit profiles of the above code example](./test/test1.svg)
+
 > [!WARNING]
 > Make sure your tallies are:
 > - **Consistent**: Their shape must be the same.
 > - **Balanced**: Their total must be the same.
-
-![Merit profiles of the above code example](./test.svg)
 
 
 ## Options
@@ -82,11 +83,14 @@ svg, err := merit.RenderLinearProfileSVG(
 
 ## Development Goodies
 
-> Unit-testing on SVG generation is clunky at best, and not really worth it.
+> Unit-testing SVG generation is clunky at best, and not really worth it.
 
-Therefore, we used a custom flavor of `svgplay` for convenience.
+Therefore, we used a custom flavor of `svgplay` for quick iterative development.
 
-    go run svgplay.go
+Run:
 
-Visit http://localhost:1999/test.go
+    go run test/svgplay.go
 
+Then, visit one of:
+- http://localhost:1999/test/test1.go
+- http://localhost:1999/test/test2.go
