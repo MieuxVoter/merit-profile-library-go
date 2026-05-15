@@ -24,33 +24,24 @@ import (
 	"strings"
 )
 
-// Proposal is also known as Candidate or Option.  It received grades from voters.
-type Proposal struct {
-	// Name of the Proposal.  An empty string is allowed.
-	Name string
-	// Tally of the grades received by this Proposal, from "worst" grade to "best" grade.
-	// An empty list is not allowed, and tallies across proposals must be:
-	// 1. Consistent: have the same length, that is they should represent the same amount of grades
-	// 2. Balanced: their sum must be the same, that is they should hold the same amount of judgments
-	Tally []uint64
-}
-
 // renderOptions uses the functional options design pattern.
 // See https://uptrace.dev/blog/golang-functional-options
 type renderOptions struct {
-	width             float64
-	height            float64
-	padding           float64
-	verticalSpacing   float64
-	gradeCornerRadius float64
-	bgCornerRadius    float64
-	bgColor           color.Color
-	medianLineColor   color.Color
-	textColor         color.Color
-	outlineColor      color.Color
-	patternColor      color.Color
-	gradesPalette     color.Palette
-	patterns          []PatternDefinition
+	width                  float64
+	height                 float64
+	padding                float64
+	horizontalSpacing      float64
+	verticalSpacing        float64
+	gradeCornerRadius      float64
+	bgCornerRadius         float64
+	bgColor                color.Color
+	medianLineColor        color.Color
+	medianLineOutlineColor color.Color
+	textColor              color.Color
+	textOutlineColor       color.Color
+	patternColor           color.Color
+	gradesPalette          color.Palette
+	patterns               []PatternDefinition
 }
 
 type RenderOptions func(options *renderOptions)
@@ -73,6 +64,12 @@ func WithPadding(padding float64) RenderOptions {
 	}
 }
 
+func WithHorizontalSpacing(horizontalSpacing float64) RenderOptions {
+	return func(options *renderOptions) {
+		options.horizontalSpacing = horizontalSpacing
+	}
+}
+
 func WithVerticalSpacing(verticalSpacing float64) RenderOptions {
 	return func(options *renderOptions) {
 		options.verticalSpacing = verticalSpacing
@@ -91,15 +88,21 @@ func WithMedianLineColor(medianLineColor color.Color) RenderOptions {
 	}
 }
 
+func WithMedianLineOutlineColor(medianLineOutlineColor color.Color) RenderOptions {
+	return func(options *renderOptions) {
+		options.medianLineOutlineColor = medianLineOutlineColor
+	}
+}
+
 func WithTextColor(textColor color.Color) RenderOptions {
 	return func(options *renderOptions) {
 		options.textColor = textColor
 	}
 }
 
-func WithOutlineColor(outlineColor color.Color) RenderOptions {
+func WithTextOutlineColor(textOutlineColor color.Color) RenderOptions {
 	return func(options *renderOptions) {
-		options.outlineColor = outlineColor
+		options.textOutlineColor = textOutlineColor
 	}
 }
 
@@ -145,19 +148,21 @@ func RenderLinearProfileSVG(
 	// TBD: check consistency and balance of tallies?  (or just wing it?)
 
 	cfg := renderOptions{
-		width:             512.00,
-		height:            -1.0, // dynamically computed if not set
-		padding:           16.00,
-		verticalSpacing:   16.00,
-		gradeCornerRadius: 6.00,
-		bgCornerRadius:    12.00,
-		bgColor:           color.NRGBA{R: 255, G: 255, B: 255, A: 255},
-		medianLineColor:   color.NRGBA{R: 1, G: 1, B: 1, A: 255},
-		textColor:         color.NRGBA{R: 0, G: 0, B: 0, A: 255},
-		outlineColor:      color.NRGBA{R: 255, G: 255, B: 255, A: 255},
-		patternColor:      color.NRGBA{R: 0, G: 0, B: 0, A: 97},
-		gradesPalette:     judgment.CreateDefaultPalette(amountOfGrades),
-		patterns:          CreateDefaultPatterns(amountOfGrades),
+		width:                  512.0,
+		height:                 -1.0, // dynamically computed if not set
+		padding:                16.0,
+		verticalSpacing:        16.0,
+		horizontalSpacing:      4.0,
+		gradeCornerRadius:      6.0,
+		bgCornerRadius:         12.0,
+		bgColor:                color.NRGBA{R: 255, G: 255, B: 255, A: 255},
+		medianLineColor:        color.NRGBA{R: 1, G: 1, B: 1, A: 255},
+		medianLineOutlineColor: color.NRGBA{R: 255, G: 255, B: 255, A: 200},
+		textColor:              color.NRGBA{R: 0, G: 0, B: 0, A: 255},
+		textOutlineColor:       color.NRGBA{R: 255, G: 255, B: 255, A: 255},
+		patternColor:           color.NRGBA{R: 0, G: 0, B: 0, A: 97},
+		gradesPalette:          judgment.CreateDefaultPalette(amountOfGrades),
+		patterns:               CreateDefaultPatterns(amountOfGrades),
 	}
 	for _, option := range options {
 		option(&cfg)
@@ -217,6 +222,31 @@ func RenderLinearProfileSVG(
 		patternIds[i] = patternDefinition(canvas, cfg.patternColor)
 	}
 
+	// A blurry outline filter for our median vertical line
+	canvas.Filter(
+		`merit_filter_blurry_outline`,
+		// Keyword objectBoundingBox should not be used when the geometry of the applicable element
+		// has no width or no height, such as the case of a horizontal or vertical line,
+		// even when the line has actual thickness when viewed due to having a non-zero stroke width,
+		// since stroke width is ignored for bounding box calculations.
+		// When the geometry of the applicable element has no width or height and objectBoundingBox is specified,
+		// then the given effect (e.g., a gradient or a filter) will be ignored.
+		// Yet we want to apply this filter on such a vertical line — hence, the usage of userSpaceOnUse here.
+		`filterUnits="userSpaceOnUse"`,
+	)
+	for dx := -1; dx <= 1; dx += 2 {
+		for dy := -1; dy <= 1; dy += 2 {
+			// Note: feDropShadow is not supported natively by the gensvg lib.  (and MRs are ignored there)
+			filter := fmt.Sprintf(
+				`<feDropShadow dx="%d" dy="%d" stdDeviation="1" flood-color="%s" flood-opacity="%s" />`,
+				dx, dy,
+				toHex(cfg.medianLineOutlineColor), toOpacity(cfg.medianLineOutlineColor),
+			)
+			_, _ = canvas.Writer.Write([]byte(filter + "\n"))
+		}
+	}
+	canvas.Fend()
+
 	canvas.DefEnd()
 
 	// Background
@@ -238,12 +268,28 @@ func RenderLinearProfileSVG(
 		// Draw the colored rectangles of the grades.
 		localX := float64(0)
 		for gradeIndex, gradeTally := range proposal.Tally {
+			if gradeTally <= 0 {
+				continue
+			}
+
 			gradeColor := cfg.gradesPalette[gradeIndex]
 			gradeWidth := width * float64(gradeTally) / amountOfJudges
 
+			firstGrade := localX == 0
+			lastGrade := localX+gradeWidth == width
+
 			rectX := localX
+			if !firstGrade {
+				rectX += cfg.horizontalSpacing * 0.5
+			}
 			rectY := localY
 			rectW := gradeWidth
+			if !firstGrade {
+				rectW -= cfg.horizontalSpacing * 0.5
+			}
+			if !lastGrade {
+				rectW -= cfg.horizontalSpacing * 0.5
+			}
 			rectH := localHeight
 
 			// Grade color
@@ -274,6 +320,7 @@ func RenderLinearProfileSVG(
 			fmt.Sprintf(`stroke="%s"`, toHex(cfg.medianLineColor)),
 			`stroke-width="4"`,
 			`stroke-dasharray="6.472 4"`,
+			`filter="url(#merit_filter_blurry_outline)"`,
 		)
 
 		// Draw the name of the proposal, and its outline
@@ -285,8 +332,8 @@ func RenderLinearProfileSVG(
 			proposal.Name,
 			fmt.Sprintf(
 				`stroke:%s; fill:%s; clip-path: url(#%s)`,
-				toHex(cfg.outlineColor),
-				toHex(cfg.outlineColor),
+				toHex(cfg.textOutlineColor),
+				toHex(cfg.textOutlineColor),
 				nameClipper,
 			),
 			`stroke-width="5"`,
