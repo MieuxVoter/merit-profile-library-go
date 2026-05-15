@@ -81,6 +81,7 @@ svg, err := merit.RenderLinearProfileSVG(
 )
 ```
 
+
 ## Development Goodies
 
 > Unit-testing SVG generation is clunky at best, and not really worth it.

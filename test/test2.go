@@ -17,11 +17,11 @@ func main() {
 			Tally: []uint64{5, 4, 10, 5, 5, 3, 8},
 		},
 		{
-			Name:  "Un crossfit dans les égoûts de Paris",
+			Name:  "Un crossfit dans les égouts de Paris",
 			Tally: []uint64{19, 5, 8, 3, 0, 3, 2},
 		},
 		{
-			Name:  "Une baignade sur une plage nudiste avec Patrick Bruel, Morandini et Depardieu",
+			Name:  "Une baignade sur une plage nudiste avec Patrick Bruel, Morandini & Depardieu",
 			Tally: []uint64{38, 0, 0, 0, 0, 0, 2},
 		},
 	}
@@ -37,7 +37,7 @@ func main() {
 		merit.WithMedianLineColor(color.NRGBA{R: 50, G: 50, B: 255, A: 255}),
 		merit.WithMedianLineOutlineColor(color.NRGBA{R: 255, G: 255, B: 0, A: 120}),
 		merit.WithTextColor(color.NRGBA{R: 220, G: 200, B: 200, A: 200}),
-		merit.WithTextOutlineColor(color.NRGBA{R: 20, G: 20, B: 20, A: 150}),
+		merit.WithTextOutlineColor(color.NRGBA{R: 20, G: 20, B: 20, A: 200}),
 		merit.WithGradesPalette([]color.Color{
 			color.NRGBA{R: 0, G: 0, B: 0, A: 255},
 			color.NRGBA{R: 36, G: 36, B: 36, A: 255},

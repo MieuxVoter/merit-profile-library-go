@@ -7,6 +7,7 @@ import (
 	"github.com/ajstarks/gensvg"
 	"github.com/mieuxvoter/majority-judgment-library-go/judgment"
 	"image/color"
+	"math"
 	"strings"
 )
 
@@ -156,7 +157,7 @@ func RenderLinearProfileSVG(
 		patternColor:           color.NRGBA{R: 0, G: 0, B: 0, A: 97},
 		gradesPalette:          judgment.CreateDefaultPalette(amountOfGrades),
 		patterns:               CreateDefaultPatterns(amountOfGrades),
-		fontFamily:             "Noto Sans, Arial, Helvetica, sans-serif",
+		fontFamily:             "OpenDyslexic Nerd Font, Noto Sans, Arial, Helvetica, sans-serif",
 	}
 	for _, option := range options {
 		option(&cfg)
@@ -259,7 +260,7 @@ func RenderLinearProfileSVG(
 
 		//canvas.Rect(0, localY, width, localHeight, "fill:magenta")
 
-		// Draw the colored rectangles of the grades.
+		// Draw the colored rectangles of the grades, and the amounts below.
 		localX := float64(0)
 		for gradeIndex, gradeTally := range proposal.Tally {
 			if gradeTally <= 0 {
@@ -269,19 +270,19 @@ func RenderLinearProfileSVG(
 			gradeColor := cfg.gradesPalette[gradeIndex]
 			gradeWidth := width * float64(gradeTally) / amountOfJudges
 
-			firstGrade := localX == 0
-			lastGrade := localX+gradeWidth == width
+			isFirstGrade := localX == 0
+			isLastGrade := math.Abs(localX+gradeWidth-width) <= 0.00001
 
 			rectX := localX
-			if !firstGrade {
+			if !isFirstGrade {
 				rectX += cfg.horizontalSpacing * 0.5
 			}
 			rectY := localY
 			rectW := gradeWidth
-			if !firstGrade {
+			if !isFirstGrade {
 				rectW -= cfg.horizontalSpacing * 0.5
 			}
-			if !lastGrade {
+			if !isLastGrade {
 				rectW -= cfg.horizontalSpacing * 0.5
 			}
 			rectH := localHeight
@@ -293,6 +294,7 @@ func RenderLinearProfileSVG(
 				cfg.gradeCornerRadius, cfg.gradeCornerRadius,
 				toFillAttrs(gradeColor),
 			)
+
 			// Grade pattern
 			if amountOfPatterns > 0 {
 				patternId := patternIds[gradeIndex%amountOfPatterns]
@@ -303,6 +305,29 @@ func RenderLinearProfileSVG(
 					fmt.Sprintf(`fill="url(#%s)"`, patternId),
 				)
 			}
+
+			// Amounts of judgments below each grade
+			canvas.Text(
+				rectX+rectW*0.5, rectY+rectH,
+				fmt.Sprintf("%d", gradeTally),
+				toFillAttrs(cfg.textOutlineColor),
+				toStrokeAttrs(cfg.textOutlineColor),
+				`stroke-width="4"`,
+				`font-size="0.75em"`,
+				fmt.Sprintf(`font-family="%s"`, cfg.fontFamily),
+				`text-anchor="middle"`,
+				`dominant-baseline="middle"`,
+			)
+			canvas.Text(
+				rectX+rectW*0.5, rectY+rectH,
+				fmt.Sprintf("%d", gradeTally),
+				toFillAttrs(cfg.textColor),
+				`stroke="none"`,
+				`font-size="0.75em"`,
+				fmt.Sprintf(`font-family="%s"`, cfg.fontFamily),
+				`text-anchor="middle"`,
+				`dominant-baseline="middle"`,
+			)
 
 			localX += gradeWidth
 		}
@@ -328,9 +353,9 @@ func RenderLinearProfileSVG(
 				`clip-path: url(#%s)`,
 				nameClipper,
 			),
+			toFillAttrs(cfg.textOutlineColor),
 			toStrokeAttrs(cfg.textOutlineColor),
 			`stroke-width="5"`,
-			toFillAttrs(cfg.textOutlineColor),
 			`font-size="1.4em"`,
 			fmt.Sprintf(`font-family="%s"`, cfg.fontFamily),
 			`dominant-baseline="middle"`,
@@ -342,6 +367,7 @@ func RenderLinearProfileSVG(
 				`clip-path: url(#%s)`,
 				nameClipper,
 			),
+			//`stroke="none"`,
 			toStrokeAttrs(cfg.textColor),
 			toFillAttrs(cfg.textColor),
 			`font-size="1.4em"`,
