@@ -4,7 +4,7 @@ Generate merit profiles (in SVG), for use for example in [Majority Judgment] pol
 
 [Majority Judgment]: https://mieuxvoter.fr
 
-> [!INFO]
+> [!TIP]
 > This library focuses on rendering the merit profiles, not ranking the proposals.
 > If you want to rank the proposals as well, there is [a library](https://github.com/MieuxVoter/majority-judgment-library-go) for that. 
 
