@@ -4,6 +4,9 @@ Generate merit profiles (in SVG), for use for example in [Majority Judgment] pol
 
 [Majority Judgment]: https://mieuxvoter.fr
 
+> [!INFO]
+> This library focuses on rendering the merit profiles, not ranking the proposals.
+> If you want to rank the proposals as well, there is [a library](https://github.com/MieuxVoter/majority-judgment-library-go) for that. 
 
 ## Usage
 
@@ -23,15 +26,15 @@ func main() {
 	proposals := []merit.Proposal{
 		{
 			Name:  "Alice the wonderful napping kangaroo 🦘 of the Æther",
-			Tally: []uint64{4, 0, 3, 7},
+			Tally: []uint64{4, 0, 3, 7}, // 4 grades, 14 judgments in total
 		},
 		{
 			Name:  "Dominique",
-			Tally: []uint64{5, 6, 1, 2},
+			Tally: []uint64{5, 6, 1, 2}, // same
 		},
 		{
 			Name:  "Théo 🗳",
-			Tally: []uint64{3, 3, 2, 6},
+			Tally: []uint64{3, 3, 2, 6}, // same
 		},
 	}
 
@@ -57,6 +60,8 @@ func main() {
 
 There are options you can pass to `RenderLinearProfileSVG()` to customize the output.
 
+> We use the _functional options pattern_, because it rocks.
+
 Here's an example:
 
 ```golang
@@ -66,11 +71,12 @@ svg, err := merit.RenderLinearProfileSVG(
 	merit.WithHeight(2048),
 	merit.WithPadding(32),
 	merit.WithVerticalSpacing(32),
-	merit.WithBgColor(color.RGBA{R: 0, G: 0, B: 0, A:255}),
-	merit.WithMedianLineColor(color.RGBA{R: 0, G: 0, B: 255, A:255}),
-	merit.WithTextColor(color.RGBA{R: 255, G: 0, B: 255, A:255}),
-	merit.WithOutlineColor(color.RGBA{R: 0, G: 255, B: 255, A:255}),
+	merit.WithBgColor(color.NRGBA{R: 0, G: 0, B: 0, A:255}),
+	merit.WithMedianLineColor(color.NRGBA{R: 0, G: 0, B: 255, A:255}),
+	merit.WithTextColor(color.NRGBA{R: 255, G: 0, B: 255, A:255}),
+	merit.WithOutlineColor(color.NRGBA{R: 0, G: 255, B: 255, A:200}),
 	//merit.WithGradesPalette(…),
+	//merit.WithPatterns(…),
 )
 ```
 
