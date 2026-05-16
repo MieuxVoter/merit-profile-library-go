@@ -31,13 +31,16 @@ func main() {
 		merit.WithWidth(800),
 		merit.WithHeight(400),
 		merit.WithPadding(32),
-		merit.WithVerticalSpacing(32),
 		merit.WithHorizontalSpacing(8),
+		merit.WithVerticalSpacing(32),
+		merit.WithGradeCornerRadius(2),
+		merit.WithBgCornerRadius(3),
 		merit.WithBgColor(color.NRGBA{R: 30, G: 20, B: 5, A: 128}),
 		merit.WithMedianLineColor(color.NRGBA{R: 50, G: 50, B: 255, A: 255}),
 		merit.WithMedianLineOutlineColor(color.NRGBA{R: 255, G: 255, B: 0, A: 120}),
 		merit.WithTextColor(color.NRGBA{R: 220, G: 200, B: 200, A: 200}),
 		merit.WithTextOutlineColor(color.NRGBA{R: 20, G: 20, B: 20, A: 200}),
+		merit.WithTextShadowColor(color.NRGBA{R: 255, G: 255, B: 255, A: 199}),
 		merit.WithGradesPalette([]color.Color{
 			color.NRGBA{R: 0, G: 0, B: 0, A: 255},
 			color.NRGBA{R: 36, G: 36, B: 36, A: 255},
@@ -47,7 +50,11 @@ func main() {
 			color.NRGBA{R: 219, G: 219, B: 219, A: 255},
 			color.NRGBA{R: 255, G: 255, B: 255, A: 255},
 		}),
-		//merit.WithPatterns(…),
+		merit.WithPatterns(merit.CreateDefaultPatterns(7)),
+		merit.WithPatternColor(color.NRGBA{R: 36, G: 0, B: 255, A: 180}),
+		merit.WithFontFamily("OpenDyslexic Nerd Font, sans-serif"),
+		merit.WithProposalFontSize("1.4em"),
+		merit.WithTallyFontSize("1.0em"),
 	)
 	if err != nil {
 		panic(err)

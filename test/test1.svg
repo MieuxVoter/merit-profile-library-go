@@ -18,40 +18,55 @@
 <pattern id="merit_pattern_hexagons_2" x="0.00" y="0.00" width="13.86" height="16.00" patternUnits="userSpaceOnUse" >
 <path d="M6.93 4.00 L3.46 6.00 L3.46 10.00 L6.93 12.00 L10.39 10.00 L10.39 6.00 ZM13.86 -4.00 L10.39 -2.00 L10.39 2.00 L13.86 4.00 L17.32 2.00 L17.32 -2.00 ZM0.00 -4.00 L-3.46 -2.00 L-3.46 2.00 L0.00 4.00 L3.46 2.00 L3.46 -2.00 ZM13.86 12.00 L10.39 14.00 L10.39 18.00 L13.86 20.00 L17.32 18.00 L17.32 14.00 ZM0.00 12.00 L-3.46 14.00 L-3.46 18.00 L0.00 20.00 L3.46 18.00 L3.46 14.00 Z" stroke="#000000" stroke-opacity="0.380" stroke-width="0.8" fill="none" />
 </pattern>
+<filter id="merit_filter_clean_outline" filterUnits="userSpaceOnUse" >
+<feMorphology in="SourceAlpha" result="DILATED"  operator="dilate" radius="2 2" />
+<feFlood result="COLOR"  flood-color="#ffffff" flood-opacity="1" />
+<feComposite in="COLOR" in2="DILATED" result="OUTLINE"  operator="in" k1="0" k2="0" k3="0" k4="0" />
+<feDropShadow in="OUTLINE" result="SHADOWED_OUTLINE" dx="0.618000" dy="1.000000" stdDeviation="0.5" flood-color="#000000" flood-opacity="1.000" />
+<feMerge>
+<feMergeNode in="SHADOWED_OUTLINE"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+</filter>
 <filter id="merit_filter_blurry_outline" filterUnits="userSpaceOnUse" >
-<feDropShadow dx="-1" dy="-1" stdDeviation="1" flood-color="#ffffff" flood-opacity="0.784" />
-<feDropShadow dx="-1" dy="1" stdDeviation="1" flood-color="#ffffff" flood-opacity="0.784" />
-<feDropShadow dx="1" dy="-1" stdDeviation="1" flood-color="#ffffff" flood-opacity="0.784" />
-<feDropShadow dx="1" dy="1" stdDeviation="1" flood-color="#ffffff" flood-opacity="0.784" />
+<feDropShadow dx="-1" dy="-1" stdDeviation="0.5" flood-color="#ffffff" flood-opacity="0.784" />
+<feDropShadow dx="-1" dy="1" stdDeviation="0.5" flood-color="#ffffff" flood-opacity="0.784" />
+<feDropShadow dx="1" dy="-1" stdDeviation="0.5" flood-color="#ffffff" flood-opacity="0.784" />
+<feDropShadow dx="1" dy="1" stdDeviation="0.5" flood-color="#ffffff" flood-opacity="0.784" />
 </filter>
 </defs>
 <rect x="-16.00" y="-16.00" width="544.00" height="208.00" rx="12.00" ry="12.00" fill="#ffffff" fill-opacity="1.000" />
 <rect x="0.00" y="0.00" width="126.00" height="48.00" rx="6.00" ry="6.00" fill="#df3222" fill-opacity="1.000" />
 <rect x="0.00" y="0.00" width="126.00" height="48.00" rx="6.00" ry="6.00" fill="url(#merit_pattern_nothing)" />
+<text x="63.00" y="48.00" fill="#000000" fill-opacity="1.000" stroke="none" font-size="0.88em" font-family="Noto Sans, Arial, Helvetica, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >5</text>
 <rect x="130.00" y="0.00" width="98.40" height="48.00" rx="6.00" ry="6.00" fill="#fab001" fill-opacity="1.000" />
 <rect x="130.00" y="0.00" width="98.40" height="48.00" rx="6.00" ry="6.00" fill="url(#merit_pattern_hexagons_1)" />
+<text x="179.20" y="48.00" fill="#000000" fill-opacity="1.000" stroke="none" font-size="0.88em" font-family="Noto Sans, Arial, Helvetica, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >4</text>
 <rect x="232.40" y="0.00" width="279.60" height="48.00" rx="6.00" ry="6.00" fill="#00a249" fill-opacity="1.000" />
 <rect x="232.40" y="0.00" width="279.60" height="48.00" rx="6.00" ry="6.00" fill="url(#merit_pattern_hexagons_2)" />
+<text x="372.20" y="48.00" fill="#000000" fill-opacity="1.000" stroke="none" font-size="0.88em" font-family="Noto Sans, Arial, Helvetica, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >11</text>
 <line x1="256.00" y1="0.00" x2="256.00" y2="48.00" stroke="#010101" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
-<text x="16.00" y="24.00" style="stroke:#ffffff; fill:#ffffff; clip-path: url(#clipProposal0)" stroke-width="5" font-size="1.4em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" >Pizza 4 Dimensions</text>
-<text x="16.00" y="24.00" style="stroke:#000000; clip-path: url(#clipProposal0)" font-size="1.4em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" >Pizza 4 Dimensions<title>Pizza 4 Dimensions</title>
+<text x="16.00" y="24.00" style="clip-path: url(#clipProposal0)" stroke="#000000" stroke-opacity="1.000" fill="#000000" fill-opacity="1.000" font-size="1.618em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >Pizza 4 Dimensions<title>Pizza 4 Dimensions</title>
 </text>
 <rect x="0.00" y="64.00" width="228.40" height="48.00" rx="6.00" ry="6.00" fill="#df3222" fill-opacity="1.000" />
 <rect x="0.00" y="64.00" width="228.40" height="48.00" rx="6.00" ry="6.00" fill="url(#merit_pattern_nothing)" />
+<text x="114.20" y="112.00" fill="#000000" fill-opacity="1.000" stroke="none" font-size="0.88em" font-family="Noto Sans, Arial, Helvetica, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >9</text>
 <rect x="232.40" y="64.00" width="124.00" height="48.00" rx="6.00" ry="6.00" fill="#fab001" fill-opacity="1.000" />
 <rect x="232.40" y="64.00" width="124.00" height="48.00" rx="6.00" ry="6.00" fill="url(#merit_pattern_hexagons_1)" />
+<text x="294.40" y="112.00" fill="#000000" fill-opacity="1.000" stroke="none" font-size="0.88em" font-family="Noto Sans, Arial, Helvetica, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >5</text>
 <rect x="360.40" y="64.00" width="151.60" height="48.00" rx="6.00" ry="6.00" fill="#00a249" fill-opacity="1.000" />
 <rect x="360.40" y="64.00" width="151.60" height="48.00" rx="6.00" ry="6.00" fill="url(#merit_pattern_hexagons_2)" />
+<text x="436.20" y="112.00" fill="#000000" fill-opacity="1.000" stroke="none" font-size="0.88em" font-family="Noto Sans, Arial, Helvetica, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >6</text>
 <line x1="256.00" y1="64.00" x2="256.00" y2="112.00" stroke="#010101" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
-<text x="16.00" y="88.00" style="stroke:#ffffff; fill:#ffffff; clip-path: url(#clipProposal1)" stroke-width="5" font-size="1.4em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" >Lasagnes Assange</text>
-<text x="16.00" y="88.00" style="stroke:#000000; clip-path: url(#clipProposal1)" font-size="1.4em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" >Lasagnes Assange<title>Lasagnes Assange</title>
+<text x="16.00" y="88.00" style="clip-path: url(#clipProposal1)" stroke="#000000" stroke-opacity="1.000" fill="#000000" fill-opacity="1.000" font-size="1.618em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >Lasagnes Assange<title>Lasagnes Assange</title>
 </text>
 <rect x="0.00" y="128.00" width="356.40" height="48.00" rx="6.00" ry="6.00" fill="#df3222" fill-opacity="1.000" />
 <rect x="0.00" y="128.00" width="356.40" height="48.00" rx="6.00" ry="6.00" fill="url(#merit_pattern_nothing)" />
+<text x="178.20" y="176.00" fill="#000000" fill-opacity="1.000" stroke="none" font-size="0.88em" font-family="Noto Sans, Arial, Helvetica, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >14</text>
 <rect x="360.40" y="128.00" width="151.60" height="48.00" rx="6.00" ry="6.00" fill="#00a249" fill-opacity="1.000" />
 <rect x="360.40" y="128.00" width="151.60" height="48.00" rx="6.00" ry="6.00" fill="url(#merit_pattern_hexagons_2)" />
+<text x="436.20" y="176.00" fill="#000000" fill-opacity="1.000" stroke="none" font-size="0.88em" font-family="Noto Sans, Arial, Helvetica, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >6</text>
 <line x1="256.00" y1="128.00" x2="256.00" y2="176.00" stroke="#010101" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
-<text x="16.00" y="152.00" style="stroke:#ffffff; fill:#ffffff; clip-path: url(#clipProposal2)" stroke-width="5" font-size="1.4em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" >Jurassique Pâtes</text>
-<text x="16.00" y="152.00" style="stroke:#000000; clip-path: url(#clipProposal2)" font-size="1.4em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" >Jurassique Pâtes<title>Jurassique Pâtes</title>
+<text x="16.00" y="152.00" style="clip-path: url(#clipProposal2)" stroke="#000000" stroke-opacity="1.000" fill="#000000" fill-opacity="1.000" font-size="1.618em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >Jurassique Pâtes<title>Jurassique Pâtes</title>
 </text>
 </svg>

@@ -159,7 +159,7 @@ func HexagonPatternDefinitionCurried(
 ) PatternDefinition {
 	return func(canvas *gensvg.SVG, colour color.Color) string {
 		h := 16.0
-		w := h * 0.5 * math.Sqrt(3)
+		w := h * 0.5 * math.Sqrt(3) // yields interesting emergent patterns
 		r := radius
 		canvas.Pattern(
 			id,

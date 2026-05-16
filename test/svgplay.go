@@ -5,8 +5,12 @@
 // (4) dark/light mode,
 // (5) compile on interval,
 //
-// This is only a dev tool we can build and use to work on this lib.
+// This is only a dev tool we use to work on this lib.
 // It does not export anything and will be tree-shaken.
+//
+// Warnings:
+// - This does not close X sessions properly, so you will need to kill the webpage from time to time.
+// - Go cache will build up like crazy ; clean it with `go clean -cache`.
 package main
 
 import (
