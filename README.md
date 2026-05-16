@@ -1,12 +1,18 @@
 # Merit Profile Generation for Golang
 
-Generate merit profiles (in SVG), for use for example in [Majority Judgment] polls.
+[![MIT](https://img.shields.io/github/license/MieuxVoter/merit-profile-library-go?style=for-the-badge)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/MieuxVoter/merit-profile-library-go?include_prereleases&style=for-the-badge)](https://github.com/MieuxVoter/merit-profile-library-go/releases)
+[![Code Quality](https://img.shields.io/codefactor/grade/github/MieuxVoter/merit-profile-library-go?style=for-the-badge)](https://www.codefactor.io/repository/github/mieuxvoter/merit-profile-library-go)
+[![A+](https://img.shields.io/badge/go%20report-A+-brightgreen.svg?style=for-the-badge)](https://goreportcard.com/report/github.com/mieuxvoter/merit-profile-library-go)
+[![Discord Chat https://discord.gg/rAAQG9S](https://img.shields.io/discord/705322981102190593.svg?style=for-the-badge)](https://discord.gg/rAAQG9S)
+
+Generate merit profiles (in _SVG_), for use for example in [Majority Judgment] polls.
 
 [Majority Judgment]: https://mieuxvoter.fr
 
 > [!TIP]
 > This library focuses on rendering the merit profiles, not ranking the proposals.
-> If you want to rank the proposals as well, there is [a library](https://github.com/MieuxVoter/majority-judgment-library-go) for that. 
+> If you want to rank the proposals as well, there is [a library](https://github.com/MieuxVoter/merit-profile-library-go) for that. 
 
 ## Usage
 
@@ -67,19 +73,38 @@ Here's an example:
 
 ```golang
 svg, err := merit.RenderLinearProfileSVG(
-	proposals,
-	merit.WithWidth(1024),
-	merit.WithHeight(2048),
-	merit.WithPadding(32),
-	merit.WithVerticalSpacing(32),
-	merit.WithBgColor(color.NRGBA{R: 0, G: 0, B: 0, A:255}),
-	merit.WithMedianLineColor(color.NRGBA{R: 0, G: 0, B: 255, A:255}),
-	merit.WithTextColor(color.NRGBA{R: 255, G: 0, B: 255, A:255}),
-	merit.WithOutlineColor(color.NRGBA{R: 0, G: 255, B: 255, A:200}),
-	//merit.WithGradesPalette(…),
-	//merit.WithPatterns(…),
+    proposals,
+    merit.WithWidth(800),
+    merit.WithHeight(400),
+    merit.WithPadding(32),
+    merit.WithHorizontalSpacing(8),
+    merit.WithVerticalSpacing(32),
+    merit.WithGradeCornerRadius(2),
+    merit.WithBgCornerRadius(3),
+    merit.WithBgColor(color.NRGBA{R: 30, G: 20, B: 5, A: 128}),
+    merit.WithMedianLineColor(color.NRGBA{R: 50, G: 50, B: 255, A: 255}),
+    merit.WithMedianLineOutlineColor(color.NRGBA{R: 255, G: 255, B: 0, A: 120}),
+    merit.WithTextColor(color.NRGBA{R: 220, G: 200, B: 200, A: 200}),
+    merit.WithTextOutlineColor(color.NRGBA{R: 20, G: 20, B: 20, A: 200}),
+    merit.WithTextShadowColor(color.NRGBA{R: 255, G: 255, B: 255, A: 199}),
+    merit.WithGradesPalette([]color.Color{
+        color.NRGBA{R: 0, G: 0, B: 0, A: 255},
+        color.NRGBA{R: 36, G: 36, B: 36, A: 255},
+        color.NRGBA{R: 73, G: 73, B: 73, A: 255},
+        color.NRGBA{R: 109, G: 109, B: 109, A: 255},
+        color.NRGBA{R: 146, G: 146, B: 146, A: 255},
+        color.NRGBA{R: 219, G: 219, B: 219, A: 255},
+        color.NRGBA{R: 255, G: 255, B: 255, A: 255},
+    }),
+    merit.WithPatterns(merit.CreateDefaultPatterns(7)),
+    merit.WithPatternColor(color.NRGBA{R: 36, G: 0, B: 255, A: 180}),
+    merit.WithFontFamily("OpenDyslexic Nerd Font, sans-serif"),
+    merit.WithProposalFontSize("1.4em"),
+    merit.WithTallyFontSize("1.0em"),
 )
 ```
+
+![Very ugly merit profiles](./test/test2.svg)
 
 
 ## Development Goodies
