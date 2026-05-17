@@ -212,8 +212,10 @@ func RenderLinearProfileSVG(
 		return "", fmt.Errorf("grades palette is too small")
 	}
 
-	width := cfg.width
+	// Compute the internal dimensions of our SVG (without padding)
+	doublePadding := 2 * cfg.padding
 	height := cfg.height
+	width := (cfg.width/cfg.height)*(height+doublePadding) - doublePadding // keep ratio
 
 	// All's well, let's start generating the SVG
 	stringBuilder := new(strings.Builder)
@@ -221,14 +223,14 @@ func RenderLinearProfileSVG(
 
 	floatPrecision := canvas.Decimals
 	canvas.Start(
-		width, height,
+		cfg.width, cfg.height,
 		// Use a crafty viewBox on the whole svg to enforce our configurable padding
 		fmt.Sprintf(
 			`viewBox="%.*f %.*f %.*f %.*f"`,
 			floatPrecision, -cfg.padding,
 			floatPrecision, -cfg.padding,
-			floatPrecision, width+2*cfg.padding,
-			floatPrecision, height+2*cfg.padding,
+			floatPrecision, width+doublePadding,
+			floatPrecision, height+doublePadding,
 		),
 	)
 
@@ -423,8 +425,9 @@ func RenderLinearProfileSVG(
 
 	svg := stringBuilder.String()
 	svg = strings.Replace(svg, vanity, "", 1)
-	// TBD: perhaps we do not need to specify the encoding? — MRs welcome
-	svg = strings.Replace(svg, xmlHeader, `<?xml version="1.0" encoding="UTF-8"?>`, 1)
+	svg = strings.TrimSpace(svg)
+	svg = strings.Replace(svg, "\n</clipPath>", "</clipPath>", -1)
+	svg = strings.Replace(svg, "\n</text>", "</text>", -1)
 
 	return svg, nil
 }

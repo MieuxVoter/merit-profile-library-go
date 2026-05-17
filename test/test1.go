@@ -23,6 +23,7 @@ func main() {
 
 	svg, err := merit.RenderLinearProfileSVG(
 		proposals,
+		//merit.WithBgColor(color.Black),
 	)
 	if err != nil {
 		panic(err)
