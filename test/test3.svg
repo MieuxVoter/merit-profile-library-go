@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<svg width="1024.00" height="96.00"
+     viewBox="-16.00 -16.00 1365.33 128.00"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<clipPath id="clipProposal0" ><rect x="0.00" y="0.00" width="1333.33" height="96.00" /></clipPath>
+<pattern id="merit_pattern_nothing" x="0.00" y="0.00" width="1000.00" height="1000.00" patternUnits="userSpaceOnUse" >
+</pattern>
+<pattern id="merit_pattern_hexagons_1" x="0.00" y="0.00" width="13.86" height="16.00" patternUnits="userSpaceOnUse" >
+<path d="M6.93 6.00 L5.20 7.00 L5.20 9.00 L6.93 10.00 L8.66 9.00 L8.66 7.00 ZM13.86 -2.00 L12.12 -1.00 L12.12 1.00 L13.86 2.00 L15.59 1.00 L15.59 -1.00 ZM0.00 -2.00 L-1.73 -1.00 L-1.73 1.00 L0.00 2.00 L1.73 1.00 L1.73 -1.00 ZM13.86 14.00 L12.12 15.00 L12.12 17.00 L13.86 18.00 L15.59 17.00 L15.59 15.00 ZM0.00 14.00 L-1.73 15.00 L-1.73 17.00 L0.00 18.00 L1.73 17.00 L1.73 15.00 Z" stroke="#000000" stroke-opacity="0.380" stroke-width="0.8" fill="none" />
+</pattern>
+<pattern id="merit_pattern_hexagons_2" x="0.00" y="0.00" width="13.86" height="16.00" patternUnits="userSpaceOnUse" >
+<path d="M6.93 4.00 L3.46 6.00 L3.46 10.00 L6.93 12.00 L10.39 10.00 L10.39 6.00 ZM13.86 -4.00 L10.39 -2.00 L10.39 2.00 L13.86 4.00 L17.32 2.00 L17.32 -2.00 ZM0.00 -4.00 L-3.46 -2.00 L-3.46 2.00 L0.00 4.00 L3.46 2.00 L3.46 -2.00 ZM13.86 12.00 L10.39 14.00 L10.39 18.00 L13.86 20.00 L17.32 18.00 L17.32 14.00 ZM0.00 12.00 L-3.46 14.00 L-3.46 18.00 L0.00 20.00 L3.46 18.00 L3.46 14.00 Z" stroke="#000000" stroke-opacity="0.380" stroke-width="0.8" fill="none" />
+</pattern>
+<pattern id="merit_pattern_hexagons_3" x="0.00" y="0.00" width="13.86" height="16.00" patternUnits="userSpaceOnUse" >
+<path d="M6.93 2.00 L1.73 5.00 L1.73 11.00 L6.93 14.00 L12.12 11.00 L12.12 5.00 ZM13.86 -6.00 L8.66 -3.00 L8.66 3.00 L13.86 6.00 L19.05 3.00 L19.05 -3.00 ZM0.00 -6.00 L-5.20 -3.00 L-5.20 3.00 L0.00 6.00 L5.20 3.00 L5.20 -3.00 ZM13.86 10.00 L8.66 13.00 L8.66 19.00 L13.86 22.00 L19.05 19.00 L19.05 13.00 ZM0.00 10.00 L-5.20 13.00 L-5.20 19.00 L0.00 22.00 L5.20 19.00 L5.20 13.00 Z" stroke="#000000" stroke-opacity="0.380" stroke-width="0.8" fill="none" />
+</pattern>
+<pattern id="merit_pattern_hexagons_4" x="0.00" y="0.00" width="13.86" height="16.00" patternUnits="userSpaceOnUse" >
+<path d="M6.93 0.00 L0.00 4.00 L0.00 12.00 L6.93 16.00 L13.86 12.00 L13.86 4.00 ZM13.86 -8.00 L6.93 -4.00 L6.93 4.00 L13.86 8.00 L20.78 4.00 L20.78 -4.00 ZM0.00 -8.00 L-6.93 -4.00 L-6.93 4.00 L0.00 8.00 L6.93 4.00 L6.93 -4.00 ZM13.86 8.00 L6.93 12.00 L6.93 20.00 L13.86 24.00 L20.78 20.00 L20.78 12.00 ZM0.00 8.00 L-6.93 12.00 L-6.93 20.00 L0.00 24.00 L6.93 20.00 L6.93 12.00 Z" stroke="#000000" stroke-opacity="0.380" stroke-width="0.8" fill="none" />
+</pattern>
+<filter id="merit_filter_clean_outline" >
+<feMorphology in="SourceAlpha" result="DILATED"  operator="dilate" radius="2 2" />
+<feFlood result="COLOR"  flood-color="#ffffff" flood-opacity="1" />
+<feComposite in="COLOR" in2="DILATED" result="OUTLINE"  operator="in" k1="0" k2="0" k3="0" k4="0" />
+<feDropShadow in="OUTLINE" result="SHADOWED_OUTLINE" dx="0.618000" dy="1.000000" stdDeviation="0.5" flood-color="#000000" flood-opacity="1.000" />
+<feMerge>
+<feMergeNode in="SHADOWED_OUTLINE"/>
+<feMergeNode in="SourceGraphic"/>
+</feMerge>
+</filter>
+<filter id="merit_filter_blurry_outline" filterUnits="userSpaceOnUse" >
+<feDropShadow dx="-1" dy="-1" stdDeviation="0.5" flood-color="#ffffff" flood-opacity="0.784" />
+<feDropShadow dx="-1" dy="1" stdDeviation="0.5" flood-color="#ffffff" flood-opacity="0.784" />
+<feDropShadow dx="1" dy="-1" stdDeviation="0.5" flood-color="#ffffff" flood-opacity="0.784" />
+<feDropShadow dx="1" dy="1" stdDeviation="0.5" flood-color="#ffffff" flood-opacity="0.784" />
+</filter>
+</defs>
+<rect x="-16.00" y="-16.00" width="1365.33" height="128.00" rx="12.00" ry="12.00" fill="#000000" fill-opacity="1.000" />
+<rect x="0.00" y="0.00" width="1333.33" height="96.00" rx="6.00" ry="6.00" fill="#00a249" fill-opacity="1.000" />
+<rect x="0.00" y="0.00" width="1333.33" height="96.00" rx="6.00" ry="6.00" fill="url(#merit_pattern_hexagons_4)" />
+<line x1="666.67" y1="0.00" x2="666.67" y2="96.00" stroke="#010101" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
+<text x="666.67" y="96.00" fill="#000000" fill-opacity="1.000" stroke="none" font-size="3em" font-family="Noto Sans, Arial, Helvetica, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >4</text>
+<text x="16.00" y="48.00" style="clip-path: url(#clipProposal0)" stroke="#000000" stroke-opacity="1.000" fill="#000000" fill-opacity="1.000" font-size="3em" font-family="Noto Sans, Arial, Helvetica, sans-serif" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >[OKFN] Open Knowledge Foundation<title>[OKFN] Open Knowledge Foundation</title></text>
+</svg>
