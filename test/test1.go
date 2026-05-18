@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/mieuxvoter/merit-profile-library-go/merit"
+	"image/color"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 
 	svg, err := merit.RenderLinearProfileSVG(
 		proposals,
-		//merit.WithBgColor(color.Black),
+		merit.WithBgColor(color.Black),
 	)
 	if err != nil {
 		panic(err)

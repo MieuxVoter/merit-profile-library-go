@@ -106,6 +106,14 @@ svg, err := merit.RenderLinearProfileSVG(
 
 ![Very ugly merit profiles](./test/test2.svg)
 
+### Use either `merit.WithHeight` or `merit.WithGradeHeight`
+
+Instead of specifying the whole SVG height,
+you can choose the height of individual profiles with:
+
+```golang
+merit.WithGradeHeight(96), // multiples of 16 look best with patterns 
+```
 
 ## Development Goodies
 
