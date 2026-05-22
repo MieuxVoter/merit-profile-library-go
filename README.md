@@ -32,7 +32,7 @@ func main() {
 	proposals := []merit.Proposal{
 		{
 			Name:  "Pizza 4 Dimensions",
-			Tally: []uint64{5, 4, 11}, // 3 grades, 20 judgments
+			Tally: []uint64{5, 4, 11}, // 3 grades (highest to lowest), 20 judgments
 		},
 		{
 			Name:  "Lasagnes Assange",
@@ -101,6 +101,7 @@ svg, err := merit.RenderLinearProfileSVG(
     merit.WithFontFamily("OpenDyslexic Nerd Font, sans-serif"),
     merit.WithProposalFontSize("1.4em"),
     merit.WithTallyFontSize("1.0em"),
+    merit.WithHighToLow(true), // ie. display green → red
 )
 ```
 
