@@ -33,7 +33,7 @@ type renderOptions struct {
 	fontFamily             string
 	proposalFontSize       string
 	tallyFontSize          string
-	highToLow              bool
+	bestGradeOnLeft        bool
 }
 
 // RenderOptions uses the functional options design pattern.
@@ -160,9 +160,9 @@ func WithTallyFontSize(fontSize string) RenderOptions {
 	}
 }
 
-func WithHighToLow(highToLow bool) RenderOptions {
+func WithBestGradeOnLeft(bestOnTheLeft bool) RenderOptions {
 	return func(options *renderOptions) {
-		options.highToLow = highToLow
+		options.bestGradeOnLeft = bestOnTheLeft
 	}
 }
 
@@ -215,7 +215,7 @@ func RenderLinearProfileSVG(
 		fontFamily:             "Noto Sans, Arial, Helvetica, sans-serif", // OpenDyslexic Nerd Font?
 		proposalFontSize:       "1.618em",
 		tallyFontSize:          "0.88em",
-		highToLow:              false,
+		bestGradeOnLeft:        false,
 	}
 	for _, option := range options {
 		option(&cfg)
@@ -351,7 +351,7 @@ func RenderLinearProfileSVG(
 		talliesNodeProperties := make([]gradeTallyNodeProperties, 0, amountOfGrades)
 		localX := float64(0)
 		for gradeIndex, gradeTally := range proposal.Tally {
-			if cfg.highToLow {
+			if cfg.bestGradeOnLeft {
 				gradeIndex = amountOfGrades - gradeIndex - 1
 				gradeTally = proposal.Tally[gradeIndex]
 			}

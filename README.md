@@ -14,6 +14,9 @@ Generate merit profiles (in _SVG_), for use for example in [Majority Judgment] p
 > This library focuses on rendering the merit profiles, not ranking the proposals.
 > If you want to rank the proposals as well, there is [a library](https://github.com/MieuxVoter/merit-profile-library-go) for that. 
 
+![Merit profiles of the following code example](./test/test1.svg)
+
+
 ## Usage
 
 ```shell
@@ -54,8 +57,6 @@ func main() {
 	fmt.Print(svg)
 }
 ```
-
-![Merit profiles of the above code example](./test/test1.svg)
 
 > [!WARNING]
 > Make sure your tallies are:
@@ -101,7 +102,7 @@ svg, err := merit.RenderLinearProfileSVG(
     merit.WithFontFamily("OpenDyslexic Nerd Font, sans-serif"),
     merit.WithProposalFontSize("1.4em"),
     merit.WithTallyFontSize("1.0em"),
-    merit.WithHighToLow(true), // ie. display green → red
+    merit.WithBestGradeOnLeft(true), // ie. display green → red
 )
 ```
 
@@ -116,6 +117,15 @@ you can choose the height of individual profiles with:
 merit.WithGradeHeight(96), // multiples of 16 look best with patterns 
 ```
 
+
+## Contribute
+
+The code contribution flow is as usual:
+1. clone
+2. hack
+3. submit a merge request
+
+
 ## Development Goodies
 
 > Unit-testing SVG generation is clunky at best, and not really worth it.
@@ -129,3 +139,5 @@ Run:
 Then, visit one of:
 - http://localhost:1999/test/test1.go
 - http://localhost:1999/test/test2.go
+- http://localhost:1999/test/test3.go
+- http://localhost:1999/test/test4.go

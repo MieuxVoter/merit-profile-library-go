@@ -25,7 +25,7 @@ func main() {
 	svg, err := merit.RenderLinearProfileSVG(
 		proposals,
 		merit.WithBgColor(color.Black),
-		merit.WithHighToLow(true),
+		merit.WithBestGradeOnLeft(true),
 	)
 	if err != nil {
 		panic(err)
