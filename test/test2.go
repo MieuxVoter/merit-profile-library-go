@@ -55,6 +55,8 @@ func main() {
 		merit.WithFontFamily("OpenDyslexic Nerd Font, sans-serif"),
 		merit.WithProposalFontSize("1.4em"),
 		merit.WithTallyFontSize("1.0em"),
+		merit.WithBestGradeOnLeft(false),
+		merit.WithMedianLineStrategy(merit.FavorAdhesion),
 	)
 	if err != nil {
 		panic(err)
