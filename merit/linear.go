@@ -34,7 +34,6 @@ type renderOptions struct {
 	proposalFontSize       string
 	tallyFontSize          string
 	bestGradeOnLeft        bool
-	offsetEvenMedian       bool
 	medianLineStrategy     EvenMedianStrategy
 }
 
