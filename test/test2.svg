@@ -55,7 +55,7 @@
 <rect x="500.80" y="0.00" width="102.40" height="60.00" rx="2.00" ry="2.00" fill="url(#merit_pattern_hexagons_5)" />
 <rect x="611.20" y="0.00" width="124.80" height="60.00" rx="2.00" ry="2.00" fill="#ffffff" fill-opacity="1.000" />
 <rect x="611.20" y="0.00" width="124.80" height="60.00" rx="2.00" ry="2.00" fill="url(#merit_pattern_hexagons_6)" />
-<line x1="368.00" y1="0.00" x2="368.00" y2="60.00" stroke="#3232ff" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
+<line x1="377.20" y1="0.00" x2="377.20" y2="60.00" stroke="#3232ff" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
 <text x="16.00" y="30.00" style="clip-path: url(#clipProposal0)" stroke="#dcc8c8" stroke-opacity="0.784" fill="#dcc8c8" fill-opacity="0.784" font-size="1.4em" font-family="OpenDyslexic Nerd Font, sans-serif" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >Une promenade sur la face cachée de la Lune<title>Une promenade sur la face cachée de la Lune</title></text>
 <text x="71.60" y="60.00" fill="#dcc8c8" fill-opacity="0.784" stroke="none" font-size="1.0em" font-family="OpenDyslexic Nerd Font, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >8</text>
 <text x="239.20" y="60.00" fill="#dcc8c8" fill-opacity="0.784" stroke="none" font-size="1.0em" font-family="OpenDyslexic Nerd Font, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >10</text>
@@ -76,7 +76,7 @@
 <rect x="537.60" y="92.00" width="47.20" height="60.00" rx="2.00" ry="2.00" fill="url(#merit_pattern_hexagons_5)" />
 <rect x="592.80" y="92.00" width="143.20" height="60.00" rx="2.00" ry="2.00" fill="#ffffff" fill-opacity="1.000" />
 <rect x="592.80" y="92.00" width="143.20" height="60.00" rx="2.00" ry="2.00" fill="url(#merit_pattern_hexagons_6)" />
-<line x1="368.00" y1="92.00" x2="368.00" y2="152.00" stroke="#3232ff" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
+<line x1="377.20" y1="92.00" x2="377.20" y2="152.00" stroke="#3232ff" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
 <text x="16.00" y="122.00" style="clip-path: url(#clipProposal1)" stroke="#dcc8c8" stroke-opacity="0.784" fill="#dcc8c8" fill-opacity="0.784" font-size="1.4em" font-family="OpenDyslexic Nerd Font, sans-serif" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >Une randonnée dans les monts de la Chartreuse<title>Une randonnée dans les monts de la Chartreuse</title></text>
 <text x="44.00" y="152.00" fill="#dcc8c8" fill-opacity="0.784" stroke="none" font-size="1.0em" font-family="OpenDyslexic Nerd Font, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >5</text>
 <text x="128.80" y="152.00" fill="#dcc8c8" fill-opacity="0.784" stroke="none" font-size="1.0em" font-family="OpenDyslexic Nerd Font, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >4</text>
@@ -97,7 +97,7 @@
 <rect x="648.00" y="184.00" width="47.20" height="60.00" rx="2.00" ry="2.00" fill="url(#merit_pattern_hexagons_5)" />
 <rect x="703.20" y="184.00" width="32.80" height="60.00" rx="2.00" ry="2.00" fill="#ffffff" fill-opacity="1.000" />
 <rect x="703.20" y="184.00" width="32.80" height="60.00" rx="2.00" ry="2.00" fill="url(#merit_pattern_hexagons_6)" />
-<line x1="368.00" y1="184.00" x2="368.00" y2="244.00" stroke="#3232ff" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
+<line x1="377.20" y1="184.00" x2="377.20" y2="244.00" stroke="#3232ff" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
 <text x="16.00" y="214.00" style="clip-path: url(#clipProposal2)" stroke="#dcc8c8" stroke-opacity="0.784" fill="#dcc8c8" fill-opacity="0.784" font-size="1.4em" font-family="OpenDyslexic Nerd Font, sans-serif" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >Un crossfit dans les égouts de Paris<title>Un crossfit dans les égouts de Paris</title></text>
 <text x="172.80" y="244.00" fill="#dcc8c8" fill-opacity="0.784" stroke="none" font-size="1.0em" font-family="OpenDyslexic Nerd Font, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >19</text>
 <text x="395.60" y="244.00" fill="#dcc8c8" fill-opacity="0.784" stroke="none" font-size="1.0em" font-family="OpenDyslexic Nerd Font, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >5</text>
@@ -109,7 +109,7 @@
 <rect x="0.00" y="276.00" width="695.20" height="60.00" rx="2.00" ry="2.00" fill="url(#merit_pattern_nothing)" />
 <rect x="703.20" y="276.00" width="32.80" height="60.00" rx="2.00" ry="2.00" fill="#ffffff" fill-opacity="1.000" />
 <rect x="703.20" y="276.00" width="32.80" height="60.00" rx="2.00" ry="2.00" fill="url(#merit_pattern_hexagons_6)" />
-<line x1="368.00" y1="276.00" x2="368.00" y2="336.00" stroke="#3232ff" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
+<line x1="377.20" y1="276.00" x2="377.20" y2="336.00" stroke="#3232ff" stroke-width="4" stroke-dasharray="6.472 4" filter="url(#merit_filter_blurry_outline)" />
 <text x="16.00" y="306.00" style="clip-path: url(#clipProposal3)" stroke="#dcc8c8" stroke-opacity="0.784" fill="#dcc8c8" fill-opacity="0.784" font-size="1.4em" font-family="OpenDyslexic Nerd Font, sans-serif" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >Une baignade sur une plage nudiste avec Patrick Bruel, Morandini &amp; Depardieu<title>Une baignade sur une plage nudiste avec Patrick Bruel, Morandini &amp; Depardieu</title></text>
 <text x="347.60" y="336.00" fill="#dcc8c8" fill-opacity="0.784" stroke="none" font-size="1.0em" font-family="OpenDyslexic Nerd Font, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >38</text>
 <text x="719.60" y="336.00" fill="#dcc8c8" fill-opacity="0.784" stroke="none" font-size="1.0em" font-family="OpenDyslexic Nerd Font, sans-serif" text-anchor="middle" dominant-baseline="middle" filter="url(#merit_filter_clean_outline)" >2</text>

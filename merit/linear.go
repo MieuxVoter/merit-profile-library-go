@@ -22,19 +22,22 @@ type renderOptions struct {
 	gradeCornerRadius      float64
 	bgCornerRadius         float64
 	bgColor                color.Color
-	medianLineColor        color.Color
-	medianLineOutlineColor color.Color
 	textColor              color.Color
 	textOutlineColor       color.Color
 	textShadowColor        color.Color
 	patternColor           color.Color
+	medianLineColor        color.Color
+	medianLineOutlineColor color.Color
+	medianLineStrategy     EvenMedianStrategy
 	gradesPalette          color.Palette
+	gradesOutlines         [][]int
+	gradesOutlinesColor    color.Color
+	gradesOutlinesWidth    float64
 	patterns               []PatternDefinition
 	fontFamily             string
 	proposalFontSize       string
 	tallyFontSize          string
 	bestGradeOnLeft        bool
-	medianLineStrategy     EvenMedianStrategy
 }
 
 // RenderOptions uses the functional options design pattern.
@@ -107,6 +110,12 @@ func WithMedianLineOutlineColor(medianLineOutlineColor color.Color) RenderOption
 	}
 }
 
+func WithMedianLineStrategy(strategy EvenMedianStrategy) RenderOptions {
+	return func(options *renderOptions) {
+		options.medianLineStrategy = strategy
+	}
+}
+
 func WithTextColor(textColor color.Color) RenderOptions {
 	return func(options *renderOptions) {
 		options.textColor = textColor
@@ -137,6 +146,24 @@ func WithGradesPalette(gradesPalette color.Palette) RenderOptions {
 	}
 }
 
+func WithGradesOutlines(outlines [][]int) RenderOptions {
+	return func(options *renderOptions) {
+		options.gradesOutlines = outlines
+	}
+}
+
+func WithGradesOutlinesColor(outlineColor color.Color) RenderOptions {
+	return func(options *renderOptions) {
+		options.gradesOutlinesColor = outlineColor
+	}
+}
+
+func WithGradesOutlinesWidth(strokeWidth float64) RenderOptions {
+	return func(options *renderOptions) {
+		options.gradesOutlinesWidth = strokeWidth
+	}
+}
+
 func WithPatterns(patterns []PatternDefinition) RenderOptions {
 	return func(options *renderOptions) {
 		options.patterns = patterns
@@ -164,12 +191,6 @@ func WithTallyFontSize(fontSize string) RenderOptions {
 func WithBestGradeOnLeft(bestOnTheLeft bool) RenderOptions {
 	return func(options *renderOptions) {
 		options.bestGradeOnLeft = bestOnTheLeft
-	}
-}
-
-func WithMedianLineStrategy(strategy EvenMedianStrategy) RenderOptions {
-	return func(options *renderOptions) {
-		options.medianLineStrategy = strategy
 	}
 }
 
@@ -213,17 +234,20 @@ func RenderLinearProfileSVG(
 		bgColor:                color.NRGBA{R: 255, G: 255, B: 255, A: 255},
 		medianLineColor:        color.NRGBA{R: 1, G: 1, B: 1, A: 255},
 		medianLineOutlineColor: color.NRGBA{R: 255, G: 255, B: 255, A: 200},
+		medianLineStrategy:     DeadCenter,
 		textColor:              color.NRGBA{R: 0, G: 0, B: 0, A: 255},
 		textOutlineColor:       color.NRGBA{R: 255, G: 255, B: 255, A: 255},
 		textShadowColor:        color.NRGBA{R: 0, G: 0, B: 0, A: 255},
 		patternColor:           color.NRGBA{R: 0, G: 0, B: 0, A: 97},
 		gradesPalette:          judgment.CreateDefaultPalette(amountOfGrades),
+		gradesOutlines:         [][]int{},
+		gradesOutlinesColor:    color.NRGBA{R: 0, G: 0, B: 0, A: 255},
+		gradesOutlinesWidth:    4.0,
 		patterns:               CreateDefaultPatterns(amountOfGrades),
 		fontFamily:             "Noto Sans, Arial, Helvetica, sans-serif", // OpenDyslexic Nerd Font?
 		proposalFontSize:       "1.618em",
 		tallyFontSize:          "0.88em",
 		bestGradeOnLeft:        false,
-		medianLineStrategy:     DeadCenter,
 	}
 	for _, option := range options {
 		option(&cfg)
@@ -405,6 +429,23 @@ func RenderLinearProfileSVG(
 					cfg.gradeCornerRadius, cfg.gradeCornerRadius,
 					fmt.Sprintf(`fill="url(#%s)"`, patternId),
 				)
+			}
+
+			// Grade outline
+			if len(cfg.gradesOutlines) > proposalIndex {
+				if contains(cfg.gradesOutlines[proposalIndex], gradeIndex) {
+					canvas.Roundrect(
+						rectX, rectY,
+						rectW, rectH,
+						cfg.gradeCornerRadius, cfg.gradeCornerRadius,
+						toStrokeAttrs(cfg.gradesOutlinesColor),
+						fmt.Sprintf(
+							`stroke-width="%*.f"`,
+							floatPrecision, cfg.gradesOutlinesWidth,
+						),
+						`fill="none"`,
+					)
+				}
 			}
 
 			// Amounts of judgments below the grade (aka. grade tally)

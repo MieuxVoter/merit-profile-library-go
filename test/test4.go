@@ -26,6 +26,15 @@ func main() {
 		proposals,
 		merit.WithBgColor(color.Black),
 		merit.WithBestGradeOnLeft(true),
+		merit.WithGradesOutlines(
+			[][]int{
+				{2},
+				{1},
+				{0},
+			},
+		),
+		merit.WithGradesOutlinesWidth(3.0),
+		merit.WithGradesOutlinesColor(color.White),
 	)
 	if err != nil {
 		panic(err)
