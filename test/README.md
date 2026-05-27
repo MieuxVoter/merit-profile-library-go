@@ -5,7 +5,7 @@ In Golang, this means that none of the variables, types, etc. in this directory 
 Run this from project root:
 
 ```shell
-max=5
+max=6
 for i in `seq 1 $max`
 do
     echo "Running test${i}.go to generate test${i}.svg"
