@@ -9,16 +9,16 @@ import (
 func main() {
 	proposals := []merit.Proposal{
 		{
-			Name:  "Pizza 4 Dimensions",
-			Tally: []uint64{5, 4, 11},
+			Name:  "🙈",
+			Tally: []uint64{0, 1, 0, 1, 2},
 		},
 		{
-			Name:  "Lasagnes Assange",
-			Tally: []uint64{9, 5, 6},
+			Name:  "🙉",
+			Tally: []uint64{1, 0, 2, 1, 0},
 		},
 		{
-			Name:  "Jurassique Pâtes",
-			Tally: []uint64{14, 0, 6},
+			Name:  "🙊",
+			Tally: []uint64{1, 1, 0, 0, 2},
 		},
 	}
 
@@ -26,11 +26,12 @@ func main() {
 		proposals,
 		merit.WithBgColor(color.Black),
 		merit.WithBestGradeOnLeft(true),
+		merit.WithMedianLineStrategy(merit.DeadCenter),
 		merit.WithGradesOutlines(
 			[][]int{
+				{3},
 				{2},
 				{1},
-				{0},
 			},
 		),
 		merit.WithGradesOutlinesWidth(3.0),
