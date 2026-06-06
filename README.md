@@ -4,7 +4,7 @@
 [![Release](https://img.shields.io/github/v/release/MieuxVoter/merit-profile-library-go?include_prereleases&style=for-the-badge)](https://github.com/MieuxVoter/merit-profile-library-go/releases)
 [![Code Quality](https://img.shields.io/codefactor/grade/github/MieuxVoter/merit-profile-library-go?style=for-the-badge)](https://www.codefactor.io/repository/github/mieuxvoter/merit-profile-library-go)
 [![A+](https://img.shields.io/badge/go%20report-A+-brightgreen.svg?style=for-the-badge)](https://goreportcard.com/report/github.com/mieuxvoter/merit-profile-library-go)
-[![Discord Chat https://discord.gg/rAAQG9S](https://img.shields.io/discord/705322981102190593.svg?style=for-the-badge)](https://discord.gg/rAAQG9S)
+[![Discord Chat https://discord.gg/k9YRuZPSZs](https://img.shields.io/discord/705322981102190593.svg?style=for-the-badge)](https://discord.gg/k9YRuZPSZs)
 
 Generate merit profiles (in _SVG_), for use for example in [Majority Judgment] polls.
 
