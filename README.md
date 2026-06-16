@@ -29,13 +29,14 @@ package main
 import (
 	"fmt"
 	"github.com/mieuxvoter/merit-profile-library-go/merit"
+	"image/color"
 )
 
 func main() {
 	proposals := []merit.Proposal{
 		{
 			Name:  "Pizza 4 Dimensions",
-			Tally: []uint64{5, 4, 11}, // 3 grades (highest to lowest), 20 judgments
+			Tally: []uint64{5, 4, 11}, // 3 grades (lowest to highest), 20 judgments
 		},
 		{
 			Name:  "Lasagnes Assange",
@@ -49,6 +50,8 @@ func main() {
 
 	svg, err := merit.RenderLinearProfileSVG(
 		proposals,
+		merit.WithBgColor(color.Black),
+		// … invoke more options here
 	)
 	if err != nil {
 		panic(err)
