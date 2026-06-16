@@ -28,7 +28,7 @@
 <path d="M6.93 -4.00 L-3.46 2.00 L-3.46 14.00 L6.93 20.00 L17.32 14.00 L17.32 2.00 ZM13.86 -12.00 L3.46 -6.00 L3.46 6.00 L13.86 12.00 L24.25 6.00 L24.25 -6.00 ZM0.00 -12.00 L-10.39 -6.00 L-10.39 6.00 L0.00 12.00 L10.39 6.00 L10.39 -6.00 ZM13.86 4.00 L3.46 10.00 L3.46 22.00 L13.86 28.00 L24.25 22.00 L24.25 10.00 ZM0.00 4.00 L-10.39 10.00 L-10.39 22.00 L0.00 28.00 L10.39 22.00 L10.39 10.00 Z" stroke="#2400ff" stroke-opacity="0.706" stroke-width="0.8" fill="none" />
 </pattern>
 <filter id="merit_filter_clean_outline" >
-<feMorphology in="SourceAlpha" result="DILATED"  operator="dilate" radius="2 2" />
+<feMorphology in="SourceAlpha" result="DILATED"  operator="dilate" radius="3 3" />
 <feFlood result="COLOR"  flood-color="#141414" flood-opacity="0.7843137254901961" />
 <feComposite in="COLOR" in2="DILATED" result="OUTLINE"  operator="in" k1="0" k2="0" k3="0" k4="0" />
 <feDropShadow in="OUTLINE" result="SHADOWED_OUTLINE" dx="0.618000" dy="1.000000" stdDeviation="0.5" flood-color="#ffffff" flood-opacity="0.780" />

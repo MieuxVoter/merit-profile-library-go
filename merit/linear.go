@@ -24,6 +24,7 @@ type renderOptions struct {
 	bgColor                color.Color
 	textColor              color.Color
 	textOutlineColor       color.Color
+	textOutlineWidth       float64
 	textShadowColor        color.Color
 	patternColor           color.Color
 	medianLineColor        color.Color
@@ -125,6 +126,12 @@ func WithTextColor(textColor color.Color) RenderOptions {
 func WithTextOutlineColor(textOutlineColor color.Color) RenderOptions {
 	return func(options *renderOptions) {
 		options.textOutlineColor = textOutlineColor
+	}
+}
+
+func WithTextOutlineWidth(textOutlineWidth float64) RenderOptions {
+	return func(options *renderOptions) {
+		options.textOutlineWidth = textOutlineWidth
 	}
 }
 
@@ -237,6 +244,7 @@ func RenderLinearProfileSVG(
 		medianLineStrategy:     DeadCenter,
 		textColor:              color.NRGBA{R: 0, G: 0, B: 0, A: 255},
 		textOutlineColor:       color.NRGBA{R: 255, G: 255, B: 255, A: 255},
+		textOutlineWidth:       2.0,
 		textShadowColor:        color.NRGBA{R: 0, G: 0, B: 0, A: 255},
 		patternColor:           color.NRGBA{R: 0, G: 0, B: 0, A: 97},
 		gradesPalette:          judgment.CreateDefaultPalette(amountOfGrades),
@@ -317,7 +325,7 @@ func RenderLinearProfileSVG(
 	canvas.FeMorphology(
 		gensvg.Filterspec{In: "SourceAlpha", Result: "DILATED"},
 		"dilate",
-		2, 2,
+		cfg.textOutlineWidth, cfg.textOutlineWidth,
 	)
 	_, _, _, textOutlineAlpha := cfg.textOutlineColor.RGBA()
 	canvas.FeFlood(
