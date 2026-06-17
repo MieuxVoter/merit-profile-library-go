@@ -40,6 +40,7 @@ func main() {
 		merit.WithMedianLineOutlineColor(color.NRGBA{R: 255, G: 255, B: 0, A: 120}),
 		merit.WithTextColor(color.NRGBA{R: 220, G: 200, B: 200, A: 200}),
 		merit.WithTextOutlineColor(color.NRGBA{R: 20, G: 20, B: 20, A: 200}),
+		merit.WithTextOutlineWidth(3.0),
 		merit.WithTextShadowColor(color.NRGBA{R: 255, G: 255, B: 255, A: 199}),
 		merit.WithGradesPalette([]color.Color{
 			color.NRGBA{R: 0, G: 0, B: 0, A: 255},

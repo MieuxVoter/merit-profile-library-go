@@ -29,13 +29,14 @@ package main
 import (
 	"fmt"
 	"github.com/mieuxvoter/merit-profile-library-go/merit"
+	"image/color"
 )
 
 func main() {
 	proposals := []merit.Proposal{
 		{
 			Name:  "Pizza 4 Dimensions",
-			Tally: []uint64{5, 4, 11}, // 3 grades (highest to lowest), 20 judgments
+			Tally: []uint64{5, 4, 11}, // 3 grades (lowest to highest), 20 judgments
 		},
 		{
 			Name:  "Lasagnes Assange",
@@ -49,6 +50,8 @@ func main() {
 
 	svg, err := merit.RenderLinearProfileSVG(
 		proposals,
+		merit.WithBgColor(color.Black),
+		// … invoke more options here
 	)
 	if err != nil {
 		panic(err)
@@ -87,6 +90,7 @@ svg, err := merit.RenderLinearProfileSVG(
     merit.WithMedianLineOutlineColor(color.NRGBA{R: 255, G: 255, B: 0, A: 120}),
     merit.WithTextColor(color.NRGBA{R: 220, G: 200, B: 200, A: 200}),
     merit.WithTextOutlineColor(color.NRGBA{R: 20, G: 20, B: 20, A: 200}),
+	merit.WithTextOutlineWidth(3.0),
     merit.WithTextShadowColor(color.NRGBA{R: 255, G: 255, B: 255, A: 199}),
     merit.WithGradesPalette([]color.Color{
         color.NRGBA{R: 0, G: 0, B: 0, A: 255},
